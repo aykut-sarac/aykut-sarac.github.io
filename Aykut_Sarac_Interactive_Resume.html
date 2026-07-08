@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aykut Sarac — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D1117;
+    --bg-soft: #11161D;
+    --surface: #161B22;
+    --surface-2: #1C232C;
+    --border: #2A323D;
+    --text: #E6EDF3;
+    --text-dim: #8B949E;
+    --text-faint: #5B6472;
+    --accent: #E3B341;
+    --accent-soft: rgba(227, 179, 65, 0.12);
+    --accent-2: #58D68D;
+    --accent-2-soft: rgba(88, 214, 141, 0.12);
+    --radius: 8px;
+    --max-w: 880px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  a { color: inherit; }
+
+  ::selection { background: var(--accent-soft); color: var(--accent); }
+
+  /* ---------------- NAV ---------------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13, 17, 23, 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .nav-logo span { color: var(--text-dim); }
+  .nav-links {
+    display: flex;
+    gap: 22px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 13.5px;
+    color: var(--text-dim);
+    font-weight: 500;
+    transition: color 0.2s;
+    padding: 4px 0;
+    border-bottom: 1.5px solid transparent;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav-cta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 7px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { opacity: 0.88; }
+  .nav-toggle { display: none; }
+
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+    .nav-toggle {
+      display: block;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+  }
+
+  /* ---------------- HERO ---------------- */
+  .hero {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 64px 24px 40px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  @media (max-width: 780px) {
+    .hero { grid-template-columns: 1fr; padding-top: 44px; }
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot-live {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-2);
+    box-shadow: 0 0 0 0 rgba(88,214,141,0.6);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(88,214,141,0.5); }
+    70% { box-shadow: 0 0 0 7px rgba(88,214,141,0); }
+    100% { box-shadow: 0 0 0 0 rgba(88,214,141,0); }
+  }
+
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.12;
+    margin-bottom: 14px;
+    letter-spacing: -0.5px;
+  }
+  .hero h1 .accent-text { color: var(--accent); }
+  .hero p.lede {
+    color: var(--text-dim);
+    font-size: 16px;
+    max-width: 50ch;
+    margin-bottom: 26px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 11px 18px;
+    border-radius: 7px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s, opacity 0.15s;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #15140C; }
+  .btn-primary:hover { opacity: 0.92; }
+  .btn-ghost { background: transparent; border-color: var(--border); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--text-faint); }
+
+  .stats-row {
+    display: flex;
+    gap: 28px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  .stat .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-top: 2px;
+  }
+
+  /* ---------------- TERMINAL ---------------- */
+  .terminal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .terminal-bar {
+    background: var(--surface-2);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border-bottom: 1px solid var(--border);
+  }
+  .terminal-bar .tdot { width: 10px; height: 10px; border-radius: 50%; }
+  .terminal-bar .tdot:nth-child(1) { background: #FF5F56; }
+  .terminal-bar .tdot:nth-child(2) { background: #FFBD2E; }
+  .terminal-bar .tdot:nth-child(3) { background: #27C93F; }
+  .terminal-bar .ttitle {
+    margin-left: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--text-faint);
+  }
+  .terminal-body {
+    padding: 20px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    min-height: 230px;
+    color: var(--text-dim);
+  }
+  .terminal-body .prompt { color: var(--accent-2); }
+  .terminal-body .key { color: #79C0FF; }
+  .terminal-body .str { color: var(--accent); }
+  .terminal-body .punc { color: var(--text-faint); }
+  #typed-output { white-space: pre-wrap; }
+  .cursor {
+    display: inline-block;
+    width: 7px;
+    height: 15px;
+    background: var(--accent-2);
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------------- SECTIONS ---------------- */
+  section { max-width: var(--max-w); margin: 0 auto; padding: 50px 24px; }
+  .section-head { margin-bottom: 26px; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 6px;
+  }
+  .section-eyebrow span { color: var(--accent); }
+  .section-head h2 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  .section-sub {
+    color: var(--text-dim);
+    font-size: 14.5px;
+    margin-top: 6px;
+    max-width: 60ch;
+  }
+
+  hr.divider { border: none; border-top: 1px solid var(--border); max-width: var(--max-w); margin: 0 auto; }
+
+  /* ---------------- SUMMARY ---------------- */
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    font-size: 15px;
+    color: #C9D1D9;
+    line-height: 1.7;
+  }
+
+  /* ---------------- SKILLS ---------------- */
+  .skills-hint {
+    font-size: 13px;
+    color: var(--text-faint);
+    margin-bottom: 16px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .skill-groups { display: flex; flex-direction: column; gap: 18px; }
+  .skill-group-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 9px;
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+  .skill-tag:hover { border-color: var(--text-faint); color: var(--text); }
+  .skill-tag.active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .filter-status {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--text-faint);
+    font-family: 'JetBrains Mono', monospace;
+    display: none;
+    align-items: center;
+    gap: 10px;
+  }
+  .filter-status.show { display: flex; }
+  .filter-status button {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: 6px;
+    padding: 3px 9px;
+    font-size: 11.5px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .filter-status button:hover { color: var(--text); border-color: var(--text-faint); }
+
+  /* ---------------- EXPERIENCE ---------------- */
+  .timeline { position: relative; }
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    transition: opacity 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  }
+  .exp-card.dimmed { opacity: 0.32; }
+  .exp-card.matched { border-color: var(--accent); }
+  .exp-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    cursor: pointer;
+  }
+  .exp-role { font-size: 16.5px; font-weight: 700; }
+  .exp-company {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent-2);
+    margin-top: 2px;
+  }
+  .exp-meta {
+    text-align: right;
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+  .exp-meta .badge-current {
+    display: inline-block;
+    margin-top: 4px;
+    background: var(--accent-2-soft);
+    color: var(--accent-2);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .exp-toggle {
+    margin-top: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-faint);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .exp-toggle .chevron { transition: transform 0.2s ease; display: inline-block; }
+  .exp-card.open .exp-toggle .chevron { transform: rotate(90deg); }
+  .exp-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.32s ease;
+  }
+  .exp-card.open .exp-body { max-height: 600px; }
+  .exp-body-inner { padding-top: 14px; }
+  .exp-body ul { list-style: none; }
+  .exp-body li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 8px;
+    font-size: 13.8px;
+    color: #C9D1D9;
+    line-height: 1.55;
+  }
+  .exp-body li::before {
+    content: "\2013";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+  .exp-body li.bullet-match { color: var(--text); }
+  .exp-body li mark.hl {
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 0 3px;
+    border-radius: 3px;
+  }
+
+  /* ---------------- EDUCATION ---------------- */
+  .edu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .edu-row:last-child { border-bottom: none; }
+  .edu-title { font-size: 14.5px; font-weight: 600; }
+  .edu-inst { color: var(--accent-2); font-family: 'JetBrains Mono', monospace; font-size: 12.5px; margin-left: 8px; }
+  .edu-date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-faint); }
+
+  /* ---------------- CONTACT / FOOTER ---------------- */
+  .contact-section {
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  .contact-section h2 { font-size: 28px; margin-bottom: 10px; }
+  .contact-section p { color: var(--text-dim); margin-bottom: 26px; }
+  .contact-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .copy-toast {
+    position: fixed;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--accent);
+    color: #15140C;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: all 0.25s ease;
+    pointer-events: none;
+    z-index: 200;
+  }
+  .copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-faint);
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ---------------- BLOG ---------------- */
+  .blog-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .blog-card-head {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .blog-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+  }
+  .blog-title { font-size: 17px; font-weight: 700; line-height: 1.35; }
+  .blog-teaser { color: var(--text-dim); font-size: 13.8px; margin-top: 8px; line-height: 1.55; }
+  .blog-readtime {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-top: 3px;
+  }
+  .blog-toggle {
+    margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .blog-toggle .chevron { transition: transform 0.2s ease; display: inline-block; }
+  .blog-card.open .blog-toggle .chevron { transform: rotate(90deg); }
+  .blog-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .blog-card.open .blog-body { max-height: 2200px; }
+  .blog-body-inner {
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    margin-top: 14px;
+    font-size: 14.2px;
+    color: #C9D1D9;
+    line-height: 1.75;
+  }
+  .blog-body-inner p { margin-bottom: 14px; }
+  .blog-body-inner p:last-child { margin-bottom: 0; }
+  .blog-body-inner strong { color: var(--text); }
+
+  /* ---------------- CREATIVE / DEMO ---------------- */
+  .creative-intro { color: var(--text-dim); font-size: 14.5px; margin-bottom: 22px; max-width: 65ch; }
+  .quote-block {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 18px;
+    margin: 0 0 28px 0;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text);
+  }
+  .quote-block cite {
+    display: block;
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-style: normal;
+    color: var(--text-faint);
+  }
+  .demo-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .demo-card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+  }
+  .demo-card h3 { font-size: 18px; margin-bottom: 6px; }
+  .demo-card .demo-sub { color: var(--text-dim); font-size: 13.5px; margin-bottom: 18px; }
+  .demo-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+  }
+  .demo-chip:hover { border-color: var(--text-faint); color: var(--text); }
+  .demo-chip.active {
+    background: var(--accent-2-soft);
+    border-color: var(--accent-2);
+    color: var(--accent-2);
+  }
+  .demo-controls-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .demo-generate-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--accent);
+    color: #15140C;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .demo-generate-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .demo-generate-btn:active { transform: translateY(0); }
+  .meal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-top: 20px;
+  }
+  @media (max-width: 780px) {
+    .meal-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .meal-day {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 10px;
+    min-height: 110px;
+  }
+  .meal-day .day-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+  }
+  .meal-day .meal-name { font-size: 12.5px; font-weight: 600; color: var(--text); line-height: 1.3; margin-bottom: 5px; }
+  .meal-day .meal-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--accent-2);
+  }
+  .demo-disclaimer {
+    margin-top: 18px;
+    font-size: 11.5px;
+    color: var(--text-faint);
+    font-family: 'JetBrains Mono', monospace;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+  .demo-empty {
+    color: var(--text-faint);
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 30px 0;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">aykut<span>.sarac()</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#blog">Writing</a></li>
+      <li><a href="#creative">Creative</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <a class="nav-cta" href="mailto:aykutsarac90@gmail.com">Get in touch</a>
+  </div>
+</nav>
+
+<div class="hero" id="about">
+  <div>
+    <div class="eyebrow"><span class="dot-live"></span> Available for opportunities</div>
+    <h1>Aykut Sarac builds <span class="accent-text">full&#8209;stack</span> products that scale.</h1>
+    <p class="lede">7+ years designing and shipping enterprise web platforms across React, Next.js, PHP, and .NET &mdash; with AI tools like Claude and OpenAI Codex baked into the workflow.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="mailto:aykutsarac90@gmail.com">Email me</a>
+      <a class="btn btn-ghost" href="#experience">See my work &darr;</a>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="num">7+</div><div class="label">Years experience</div></div>
+      <div class="stat"><div class="num">3,000+</div><div class="label">Users supported</div></div>
+      <div class="stat"><div class="num">4</div><div class="label">Companies &amp; ventures</div></div>
+    </div>
+  </div>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>
+      <div class="ttitle">whoami.ts</div>
+    </div>
+    <div class="terminal-body">
+      <span class="prompt">&gt;</span> whoami<br>
+      <div id="typed-output"></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section id="summary">
+  <div class="section-head">
+    <div class="section-eyebrow"><span>01.</span> Summary</div>
+    <h2>What I do</h2>
+  </div>
+  <div class="summary-card">
+    Full Stack Developer with over 7 years of experience designing, developing, and modernising enterprise web applications using React, Next.js, PHP, .NET, C#, Node.js, and TypeScript. Proven track record of delivering customer-facing platforms, internal business systems, and API integrations from concept to production, including platforms supporting 3,000+ active users. Skilled in modernising legacy applications, improving software architecture, and building high-performance solutions for enterprise and SME clients. Adept at leveraging AI-assisted development tools, including Claude and OpenAI Codex, to accelerate problem-solving and deliver high-quality software faster.
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="skills">
+  <div class="section-head">
+    <div class="section-eyebrow"><span>02.</span> Skills</div>
+    <h2>Core skills</h2>
+    <p class="section-sub">Click any skill to see where I've actually used it in my experience below.</p>
+  </div>
+
+  <div class="skill-groups">
+    <div>
+      <div class="skill-group-label">Frontend</div>
+      <div class="tag-row">
+        <span class="skill-tag" data-skill="react">React</span>
+        <span class="skill-tag" data-skill="nextjs">Next.js</span>
+        <span class="skill-tag" data-skill="blazor">Blazor</span>
+        <span class="skill-tag" data-skill="typescript">TypeScript</span>
+        <span class="skill-tag" data-skill="css">HTML5 / CSS3</span>
+        <span class="skill-tag" data-skill="redux">Redux</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">Backend</div>
+      <div class="tag-row">
+        <span class="skill-tag" data-skill="dotnet">.NET / C#</span>
+        <span class="skill-tag" data-skill="node">Node.js</span>
+        <span class="skill-tag" data-skill="php">PHP</span>
+        <span class="skill-tag" data-skill="api">REST APIs</span>
+        <span class="skill-tag" data-skill="sql">SQL / NoSQL</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">Tools &amp; Practices</div>
+      <div class="tag-row">
+        <span class="skill-tag" data-skill="git">Git</span>
+        <span class="skill-tag" data-skill="cicd">CI/CD</span>
+        <span class="skill-tag" data-skill="testing">Jest / Playwright</span>
+        <span class="skill-tag" data-skill="architecture">Architecture</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">AI &amp; Productivity</div>
+      <div class="tag-row">
+        <span class="skill-tag" data-skill="claude">Claude</span>
+        <span class="skill-tag" data-skill="codex">OpenAI Codex</span>
+        <span class="skill-tag" data-skill="ai">AI-Assisted Dev</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-status" id="filterStatus">
+    Filtering experience by <strong id="filterSkillName" style="color: var(--accent); margin: 0 4px;"></strong>
+    <button id="clearFilter">Clear &times;</button>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="experience">
+  <div class="section-head">
+    <div class="section-eyebrow"><span>03.</span> Experience</div>
+    <h2>Where I've worked</h2>
+    <p class="section-sub">Click a role to expand the details.</p>
+  </div>
+
+  <div class="timeline" id="timeline">
+
+    <article class="exp-card open" data-skills="php,react,nextjs,api,architecture,cicd,claude,codex,ai">
+      <div class="exp-card-head">
+        <div>
+          <div class="exp-role">Full Stack Developer</div>
+          <div class="exp-company">Compare and Connect</div>
+        </div>
+        <div class="exp-meta">JAN 2022 &ndash; PRESENT<br>Melbourne, AU<span class="badge-current">Current</span></div>
+      </div>
+      <div class="exp-toggle"><span class="chevron">&#9656;</span> Details</div>
+      <div class="exp-body"><div class="exp-body-inner">
+        <ul>
+          <li data-skills="php,react,nextjs">Design, develop, and maintain large-scale enterprise applications using PHP, React, and Next.js across customer-facing and internal platforms.</li>
+          <li data-skills="architecture">Lead end-to-end development of admin and agent portals supporting 3,000+ active users, from architecture through deployment.</li>
+          <li data-skills="claude,codex,ai">Apply Claude and OpenAI Codex throughout the development workflow to accelerate debugging, refactoring, and documentation while maintaining code quality.</li>
+          <li data-skills="api">Design and implement RESTful APIs integrating with external platforms including REX, realestate.com.au, and Console Cloud, enabling automated workflows and real-time data synchronisation.</li>
+          <li data-skills="architecture">Modernise legacy applications by introducing contemporary architecture, improving maintainability, performance, and extensibility.</li>
+          <li data-skills="cicd,testing">Implement automated testing and CI/CD pipelines, improving deployment reliability and reducing release risk.</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <article class="exp-card" data-skills="php,architecture">
+      <div class="exp-card-head">
+        <div>
+          <div class="exp-role">Co-Founder</div>
+          <div class="exp-company">vidora.com.au</div>
+        </div>
+        <div class="exp-meta">JAN 2024 &ndash; JAN 2026<br>Melbourne, AU</div>
+      </div>
+      <div class="exp-toggle"><span class="chevron">&#9656;</span> Details</div>
+      <div class="exp-body"><div class="exp-body-inner">
+        <ul>
+          <li data-skills="php">Co-founded and launched an e-commerce platform on WordPress and WooCommerce, delivering a customised product personalisation experience.</li>
+          <li data-skills="architecture">Designed and implemented custom functionality to support business operations, customer management, and payment processing.</li>
+          <li data-skills="api">Integrated Stripe payment services and optimised checkout workflows to improve customer experience.</li>
+          <li>Managed ongoing platform enhancements, technical maintenance, and feature development to support business growth.</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <article class="exp-card" data-skills="dotnet,blazor,react,architecture">
+      <div class="exp-card-head">
+        <div>
+          <div class="exp-role">Front-End Developer</div>
+          <div class="exp-company">BoomBet</div>
+        </div>
+        <div class="exp-meta">AUG 2020 &ndash; JAN 2022<br>Melbourne, AU</div>
+      </div>
+      <div class="exp-toggle"><span class="chevron">&#9656;</span> Details</div>
+      <div class="exp-body"><div class="exp-body-inner">
+        <ul>
+          <li data-skills="dotnet,blazor,react">Led the rebuild of the company's flagship sports betting platform (formerly Sportsbetting.com.au) using .NET, Blazor, and React.</li>
+          <li data-skills="architecture">Built reusable front-end components and a scalable application architecture to accelerate future feature delivery.</li>
+          <li data-skills="css">Standardised the platform with a responsive, mobile-first design approach, improving accessibility across devices.</li>
+          <li>Refactored legacy functionality to improve application performance, maintainability, and user experience.</li>
+          <li data-skills="architecture">Evaluated technical feasibility of product requirements and contributed to key architectural decisions.</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <article class="exp-card" data-skills="react,css">
+      <div class="exp-card-head">
+        <div>
+          <div class="exp-role">Web Developer</div>
+          <div class="exp-company">Freelancer</div>
+        </div>
+        <div class="exp-meta">MAR 2019 &ndash; PRESENT<br>Melbourne, AU<span class="badge-current">Current</span></div>
+      </div>
+      <div class="exp-toggle"><span class="chevron">&#9656;</span> Details</div>
+      <div class="exp-body"><div class="exp-body-inner">
+        <ul>
+          <li data-skills="react">Deliver custom web applications and interactive websites for multiple clients using React and modern JavaScript technologies.</li>
+          <li>Manage projects across the full software development lifecycle, from requirements gathering and solution design to deployment and support.</li>
+          <li data-skills="css">Build reusable UI components and optimise front-end performance to improve maintainability and user experience.</li>
+          <li>Work directly with clients to translate business requirements into practical technical solutions.</li>
+        </ul>
+      </div></div>
+    </article>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="blog">
+  <div class="section-head">
+    <div class="section-eyebrow"><span>04.</span> Writing</div>
+    <h2>Notes from the field</h2>
+    <p class="section-sub">Some of what I've been thinking about, building, and learning — written as I go, not polished after the fact.</p>
+  </div>
+
+  <article class="blog-card open">
+    <div class="blog-card-head">
+      <div>
+        <div class="blog-meta">Technology &amp; the future</div>
+        <div class="blog-title">What's accelerating right now, and what it actually means for the next few years</div>
+        <div class="blog-teaser">Models are improving faster than most teams can absorb them. The interesting question isn't "what can AI do today" — it's what happens to software roles once the bottleneck moves from typing code to deciding what's worth building.</div>
+      </div>
+      <div class="blog-readtime">4 min read</div>
+    </div>
+    <div class="blog-toggle"><span class="chevron">&#9656;</span> Read full post</div>
+    <div class="blog-body"><div class="blog-body-inner">
+      <p>Every year in this industry has felt fast. This one feels different. In the space of about two years, I went from using autocomplete that finished a line of code, to working alongside tools like Claude and OpenAI Codex that can hold an entire feature's context, propose an architecture, write the tests, and explain the trade-offs in plain English. That's not an incremental jump — it's a change in what a single developer can be responsible for.</p>
+      <p>The technology that's moving fastest right now isn't really "AI" as a single thing. It's the combination of three trends landing at once: models that reason over much longer context, agentic tooling that lets those models take multi-step actions instead of just answering questions, and a drop in the cost of running all of this that makes it viable to use constantly rather than occasionally. Put together, that's the difference between "a smart autocomplete" and "a collaborator that can carry a task from a vague description to a working pull request."</p>
+      <p>What I think this changes, practically, is where the value of a developer sits. Writing syntactically correct code was never really the hard part of the job — understanding the actual problem, the constraints of the business, and the shape of a system that will still make sense in two years was always the hard part. AI tools are compressing the time it takes to go from idea to working code so aggressively that the remaining bottleneck is almost entirely judgment: knowing what to build, what not to build, and when the AI's confident-sounding answer is quietly wrong.</p>
+      <p>My honest prediction is that the next few years separate developers into two groups, and it won't be about who uses AI tools and who doesn't — almost everyone will. It'll be about who used the time AI saved them to get better at the things AI still can't do: reading a room of stakeholders with conflicting priorities, designing systems that age well, and knowing when "fast" is the wrong goal. <strong>The tools are accelerating the easy 80% of the job. The 20% that was always hard is, if anything, becoming more valuable, not less.</strong></p>
+    </div></div>
+  </article>
+
+  <article class="blog-card">
+    <div class="blog-card-head">
+      <div>
+        <div class="blog-meta">AI &amp; the workforce</div>
+        <div class="blog-title">AI is fast-forwarding skill — and quietly creating gaps we haven't named yet</div>
+        <div class="blog-teaser">Using Claude and Codex daily has made me dramatically faster. It has also shown me, in my own work, exactly where the shortcut becomes a liability if you're not paying attention.</div>
+      </div>
+      <div class="blog-readtime">5 min read</div>
+    </div>
+    <div class="blog-toggle"><span class="chevron">&#9656;</span> Read full post</div>
+    <div class="blog-body"><div class="blog-body-inner">
+      <p>I want to be upfront about something: AI-assisted development has made me better and faster at my job. I use it daily to debug, refactor, explore unfamiliar parts of a codebase, and draft documentation I'd otherwise put off. None of what follows is an argument against using these tools — it's an observation about a side effect I've watched happen, including in my own habits, that I think is worth naming honestly.</p>
+      <p>The shortcut these tools offer is real: a problem that used to take an hour of digging through documentation and Stack Overflow now takes minutes of conversation. The risk is what happens to the hour you didn't spend. That hour wasn't just "time to find the answer" — it was also the time where you built an internal model of why the answer was the answer. Skip that often enough, and you can end up with someone who can ship a working feature without being able to explain why it works, or confidently debug it when the AI's first suggestion doesn't fit the actual problem.</p>
+      <p>I've seen the early version of this in myself. There have been moments where I accepted a refactor Codex suggested because it looked clean and passed the tests, then realised later I couldn't have written a clear explanation of the trade-off it made. That's a flag, not a catastrophe — but if it happens often enough, across enough people, it adds up to a workforce that's faster at producing code and slower at actually understanding the systems it's responsible for. That gap doesn't show up in a sprint demo. It shows up eighteen months later, during an outage, when nobody in the room can reason confidently about why the system is behaving the way it is.</p>
+      <p>The fix isn't "use AI less." It's treating AI-assisted output the way a good senior engineer treats a junior's pull request: useful, often excellent, but not exempt from being understood before it ships. In practice, that means I still make myself explain a non-trivial AI-generated change in my own words before I commit it, and I still deliberately work through some problems the slow way, specifically so the muscle doesn't atrophy. <strong>The tool accelerates the work. It can't accelerate the understanding — that part is still on us, and it's the part that's easiest to quietly skip.</strong></p>
+    </div></div>
+  </article>
+</section>
+
+<hr class="divider">
+
+<section id="creative">
+  <div class="section-head">
+    <div class="section-eyebrow"><span>05.</span> Creative</div>
+    <h2>Things I build for fun</h2>
+    <p class="section-sub">Side projects and small experiments — mostly about using AI as a practical tool for everyday problems, not just for work.</p>
+  </div>
+
+  <p class="creative-intro">A lot of my side projects start from the same itch: a small, repetitive decision in daily life that AI is well-suited to take off my plate. Weekly meal planning is one of them — it's a constraint-satisfaction problem wearing a normal-life costume, which makes it a fun one to build for.</p>
+
+  <blockquote class="quote-block">
+    Technology is a tool. Practice is the daily habit that actually turns it into a skill.
+    <cite>&mdash; Aykut Sarac</cite>
+  </blockquote>
+
+  <div class="demo-card">
+    <div class="demo-card-label">Interactive demo</div>
+    <h3>Weekly meal prep planner</h3>
+    <p class="demo-sub">Pick what matters to you this week, then generate a 7-day dinner plan. Built as a small rule-based planner to show the kind of product thinking I'd bring to an AI-powered feature &mdash; not a live model call.</p>
+
+    <div class="demo-controls-row" id="mealPrefs">
+      <span class="demo-chip active" data-pref="quick">&#9201; Quick (&lt;25 min)</span>
+      <span class="demo-chip" data-pref="highProtein">&#129385; High-protein</span>
+      <span class="demo-chip" data-pref="vegetarian">&#127807; Vegetarian-friendly</span>
+      <span class="demo-chip" data-pref="budget">&#128176; Budget-friendly</span>
+    </div>
+
+    <button class="demo-generate-btn" id="generatePlanBtn">Generate this week's plan</button>
+
+    <div id="mealGridWrap"></div>
+
+    <div class="demo-disclaimer">// Rule-based demo running entirely in your browser — no data leaves this page, no API key required.</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="education">
+  <div class="section-head">
+    <div class="section-eyebrow"><span>06.</span> Education</div>
+    <h2>Education</h2>
+  </div>
+  <div>
+    <div class="edu-row">
+      <div><span class="edu-title">Leadership &amp; Management</span><span class="edu-inst">Australian Pacific College</span></div>
+      <div class="edu-date">JAN 2018 &ndash; JAN 2019</div>
+    </div>
+    <div class="edu-row">
+      <div><span class="edu-title">Leadership &amp; Management</span><span class="edu-inst">Cambridge International College</span></div>
+      <div class="edu-date">JAN 2016 &ndash; JAN 2017</div>
+    </div>
+    <div class="edu-row">
+      <div><span class="edu-title">Industrial Engineering</span><span class="edu-inst">Bogazici University</span></div>
+      <div class="edu-date">JAN 2008 &ndash; JAN 2013</div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="section-eyebrow" style="justify-content:center; display:flex;"><span>07.</span>&nbsp;Contact</div>
+  <h2>Let's build something.</h2>
+  <p>Open to full-time roles and contract work. Reach out any time.</p>
+  <div class="contact-actions">
+    <a class="btn btn-primary" href="mailto:aykutsarac90@gmail.com">aykutsarac90@gmail.com</a>
+    <button class="btn btn-ghost" id="copyPhone">0412 893 305 &nbsp;&#128203;</button>
+  </div>
+</section>
+
+<footer>Melbourne, Australia &mdash; built by Aykut Sarac</footer>
+
+<div class="copy-toast" id="copyToast">Phone number copied</div>
+
+<script>
+  // Typing animation for terminal
+  const typedEl = document.getElementById('typed-output');
+  const lines = [
+    { k: 'name', v: '"Aykut Sarac"' },
+    { k: 'role', v: '"Full Stack Developer"' },
+    { k: 'location', v: '"Melbourne, AU"' },
+    { k: 'experience', v: '"7+ years"' },
+    { k: 'stack', v: '["React","Next.js","PHP",".NET","Node.js"]' },
+    { k: 'aiTools', v: '["Claude","OpenAI Codex"]' },
+    { k: 'currentRole', v: '"Compare and Connect"' }
+  ];
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function renderStatic() {
+    let html = '<span class="punc">{</span><br>';
+    lines.forEach((l, i) => {
+      html += `&nbsp;&nbsp;<span class="key">${l.k}</span><span class="punc">:</span> <span class="str">${l.v}</span>${i < lines.length - 1 ? '<span class="punc">,</span>' : ''}<br>`;
+    });
+    html += '<span class="punc">}</span>';
+    typedEl.innerHTML = html;
+  }
+
+  async function typeLines() {
+    let html = '<span class="punc">{</span><br>';
+    typedEl.innerHTML = html + '<span class="cursor"></span>';
+    for (let i = 0; i < lines.length; i++) {
+      const l = lines[i];
+      const full = `&nbsp;&nbsp;<span class="key">${l.k}</span><span class="punc">:</span> <span class="str">${l.v}</span>${i < lines.length - 1 ? '<span class="punc">,</span>' : ''}`;
+      // type char by char on a simplified text version for performance, but since this contains HTML, just append progressively
+      html += full + '<br>';
+      typedEl.innerHTML = html + '<span class="cursor"></span>';
+      await new Promise(r => setTimeout(r, 220));
+    }
+    typedEl.innerHTML = html + '<span class="punc">}</span>';
+  }
+
+  if (prefersReduced) {
+    renderStatic();
+  } else {
+    typeLines();
+  }
+
+  // Skill filtering
+  const skillTags = document.querySelectorAll('.skill-tag');
+  const expCards = document.querySelectorAll('.exp-card');
+  const filterStatus = document.getElementById('filterStatus');
+  const filterSkillName = document.getElementById('filterSkillName');
+  const clearFilterBtn = document.getElementById('clearFilter');
+  let activeSkill = null;
+
+  function applyFilter(skill, label) {
+    activeSkill = skill;
+    skillTags.forEach(t => t.classList.toggle('active', t.dataset.skill === skill));
+    filterStatus.classList.add('show');
+    filterSkillName.textContent = label;
+
+    expCards.forEach(card => {
+      const cardSkills = (card.dataset.skills || '').split(',');
+      const matches = cardSkills.includes(skill);
+      card.classList.toggle('dimmed', !matches);
+      card.classList.toggle('matched', matches);
+      if (matches) card.classList.add('open');
+
+      card.querySelectorAll('li').forEach(li => {
+        const liSkills = (li.dataset.skills || '').split(',');
+        if (liSkills.includes(skill)) {
+          li.classList.add('bullet-match');
+          if (!li.querySelector('mark.hl')) {
+            li.innerHTML = '<mark class="hl">' + li.innerHTML + '</mark>';
+          }
+        }
+      });
+    });
+
+    document.getElementById('experience').scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+  }
+
+  function clearFilter() {
+    activeSkill = null;
+    skillTags.forEach(t => t.classList.remove('active'));
+    filterStatus.classList.remove('show');
+    expCards.forEach((card, idx) => {
+      card.classList.remove('dimmed', 'matched');
+      if (idx !== 0) card.classList.remove('open');
+      card.querySelectorAll('li').forEach(li => {
+        li.classList.remove('bullet-match');
+        const mk = li.querySelector('mark.hl');
+        if (mk) { li.innerHTML = mk.innerHTML; }
+      });
+    });
+  }
+
+  skillTags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      if (activeSkill === tag.dataset.skill) {
+        clearFilter();
+      } else {
+        applyFilter(tag.dataset.skill, tag.textContent.trim());
+      }
+    });
+  });
+  clearFilterBtn.addEventListener('click', clearFilter);
+
+  // Expand/collapse experience cards
+  document.querySelectorAll('.exp-card-head').forEach(head => {
+    head.addEventListener('click', () => {
+      head.closest('.exp-card').classList.toggle('open');
+    });
+  });
+
+  // Copy phone number
+  const copyBtn = document.getElementById('copyPhone');
+  const toast = document.getElementById('copyToast');
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText('0412893305');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    } catch (e) {
+      /* clipboard not available, ignore */
+    }
+  });
+
+  // Active nav link on scroll
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  const sections = ['about','skills','experience','blog','creative','education'].map(id => document.getElementById(id));
+  function onScroll() {
+    let current = sections[0];
+    sections.forEach(s => { if (s && window.scrollY >= s.offsetTop - 120) current = s; });
+    navAnchors.forEach(a => a.classList.toggle('active', current && a.getAttribute('href') === '#' + current.id));
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // ---------------- Blog accordion ----------------
+  document.querySelectorAll('.blog-card-head').forEach(head => {
+    head.addEventListener('click', () => {
+      head.closest('.blog-card').classList.toggle('open');
+    });
+  });
+
+  // ---------------- Meal planner demo ----------------
+  const MEALS = [
+    { name: 'Lemon herb chicken & roasted veg', time: '25 min', tags: ['quick','highProtein'] },
+    { name: 'Chickpea & spinach curry', time: '20 min', tags: ['quick','vegetarian','budget'] },
+    { name: 'Beef stir-fry with brown rice', time: '20 min', tags: ['quick','highProtein'] },
+    { name: 'Baked salmon with quinoa', time: '25 min', tags: ['highProtein'] },
+    { name: 'Lentil & vegetable soup', time: '30 min', tags: ['vegetarian','budget'] },
+    { name: 'Turkey mince taco bowls', time: '20 min', tags: ['quick','highProtein','budget'] },
+    { name: 'Tofu & broccoli stir-fry', time: '18 min', tags: ['quick','vegetarian','budget'] },
+    { name: 'Grilled steak with sweet potato', time: '25 min', tags: ['highProtein'] },
+    { name: 'Egg fried rice with peas', time: '15 min', tags: ['quick','vegetarian','budget'] },
+    { name: 'Greek-style chicken & salad', time: '22 min', tags: ['quick','highProtein'] },
+    { name: 'Black bean & corn quesadillas', time: '15 min', tags: ['quick','vegetarian','budget'] },
+    { name: 'Shrimp pasta with garlic & chili', time: '20 min', tags: ['quick','highProtein'] },
+    { name: 'Vegetable fried noodles', time: '18 min', tags: ['quick','vegetarian','budget'] },
+    { name: 'Baked cod with roasted potatoes', time: '30 min', tags: ['highProtein'] },
+    { name: 'Mushroom & spinach risotto', time: '28 min', tags: ['vegetarian'] },
+  ];
+
+  const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const mealPrefsEl = document.getElementById('mealPrefs');
+  const mealGridWrap = document.getElementById('mealGridWrap');
+  const generateBtn = document.getElementById('generatePlanBtn');
+  const activePrefs = new Set(['quick']);
+
+  mealPrefsEl.querySelectorAll('.demo-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const pref = chip.dataset.pref;
+      if (activePrefs.has(pref)) {
+        activePrefs.delete(pref);
+        chip.classList.remove('active');
+      } else {
+        activePrefs.add(pref);
+        chip.classList.add('active');
+      }
+    });
+  });
+
+  function generatePlan() {
+    let pool = MEALS.filter(m => {
+      for (const pref of activePrefs) {
+        if (!m.tags.includes(pref)) return false;
+      }
+      return true;
+    });
+    if (pool.length === 0) pool = MEALS.slice();
+
+    // shuffle a copy, then pick 7 avoiding immediate repeats where possible
+    const shuffled = pool.slice().sort(() => Math.random() - 0.5);
+    const plan = [];
+    for (let i = 0; i < 7; i++) {
+      let candidate = shuffled[i % shuffled.length];
+      if (plan.length && candidate.name === plan[plan.length - 1].name && shuffled.length > 1) {
+        candidate = shuffled[(i + 1) % shuffled.length];
+      }
+      plan.push(candidate);
+    }
+
+    mealGridWrap.innerHTML = '<div class="meal-grid">' + plan.map((meal, i) => `
+      <div class="meal-day">
+        <div class="day-label">${DAYS[i]}</div>
+        <div class="meal-name">${meal.name}</div>
+        <div class="meal-time">${meal.time}</div>
+      </div>
+    `).join('') + '</div>';
+  }
+
+  generateBtn.addEventListener('click', generatePlan);
+  // generate an initial plan on load so the section isn't empty
+  generatePlan();
+</script>
+
+</body>
+</html>
